@@ -43,8 +43,10 @@
             const weatherCode = weatherData.current_weather.weathercode;
             
             document.getElementById('weather-temp').textContent = `${temp}°F`;
-            document.getElementById('weather-location').textContent = 'Current Weather';
             document.getElementById('weather-icon').textContent = getWeatherIcon(weatherCode);
+            
+            // Fetch location in background (don't block weather display)
+            fetchLocation(lat, lon);
           } catch (error) {
             console.error('Weather fetch error:', error);
             document.getElementById('weather-location').textContent = 'Weather unavailable';
@@ -61,6 +63,22 @@
       } catch (error) {
         console.error('Geolocation error:', error);
         document.getElementById('weather-location').textContent = 'Weather unavailable';
+      }
+    }
+    
+    // Fetch location name separately (async)
+    async function fetchLocation(lat, lon) {
+      try {
+        const response = await fetch(
+          `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`
+        );
+        const data = await response.json();
+        
+        const city = data.address?.city || data.address?.town || data.address?.village || 'Your Location';
+        document.getElementById('weather-location').textContent = city;
+      } catch (error) {
+        console.error('Location fetch error:', error);
+        document.getElementById('weather-location').textContent = 'Current Weather';
       }
     }
     
