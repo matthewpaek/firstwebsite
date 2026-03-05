@@ -38,6 +38,32 @@ h1 {
   background: rgba(255, 255, 255, 0.2);
 }
 
+#weather-widget {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin: 0 auto 1.5rem;
+  max-width: 250px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+#weather-icon {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+#weather-temp {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+#weather-location {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
 .contact-btn {
   border: none;
   border-radius: 999px;

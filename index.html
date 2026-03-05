@@ -13,7 +13,78 @@
 
     <img class="profile-photo" src="062-WVq9rEaHPx0.jpeg" alt="Photo of me" />
 
+    <div id="weather-widget">
+      <div id="weather-icon">🌤️</div>
+      <div id="weather-temp">--°F</div>
+      <div id="weather-location">Loading...</div>
+    </div>
+
     <button type="button" class="contact-btn">Contact Me</button>
   </main>
+
+  <script>
+    // Fetch weather data
+    async function getWeather() {
+      try {
+        // Get user's location
+        navigator.geolocation.getCurrentPosition(async (position) => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+          
+          // Fetch weather data from Open-Meteo (free, no API key needed)
+          const weatherResponse = await fetch(
+            `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&temperature_unit=fahrenheit`
+          );
+          const weatherData = await weatherResponse.json();
+          
+          // Fetch location name using reverse geocoding
+          const locationResponse = await fetch(
+            `https://geocode.maps.co/reverse?lat=${lat}&lon=${lon}`
+          );
+          const locationData = await locationResponse.json();
+          
+          // Update weather display
+          const temp = Math.round(weatherData.current_weather.temperature);
+          const weatherCode = weatherData.current_weather.weathercode;
+          
+          document.getElementById('weather-temp').textContent = `${temp}°F`;
+          document.getElementById('weather-location').textContent = 
+            locationData.address?.city || locationData.address?.town || 'Your Location';
+          document.getElementById('weather-icon').textContent = getWeatherIcon(weatherCode);
+        }, (error) => {
+          // If location access denied, show default message
+          document.getElementById('weather-location').textContent = 'Enable location for weather';
+          document.getElementById('weather-temp').textContent = '';
+        });
+      } catch (error) {
+        console.error('Weather fetch error:', error);
+        document.getElementById('weather-location').textContent = 'Weather unavailable';
+      }
+    }
+    
+    // Map weather codes to emoji icons
+    function getWeatherIcon(code) {
+      const icons = {
+        0: '☀️',     // Clear
+        1: '🌤️',    // Mainly clear
+        2: '⛅',    // Partly cloudy
+        3: '☁️',     // Overcast
+        45: '🌫️',   // Fog
+        48: '🌫️',   // Fog
+        51: '🌦️',   // Drizzle
+        61: '🌧️',   // Rain
+        63: '🌧️',   // Rain
+        65: '🌧️',   // Rain
+        71: '🌨️',   // Snow
+        73: '🌨️',   // Snow
+        75: '🌨️',   // Snow
+        95: '⛈️',   // Thunderstorm
+      };
+      return icons[code] || '🌤️';
+    }
+    
+    // Load weather on page load
+    getWeather();
+  </script>
 </body>
 </html>
