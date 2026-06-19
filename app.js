@@ -30,7 +30,7 @@ async function getWeather() {
     }, (error) => {
       // If location access denied, show default message
       document.getElementById('weather-location').textContent = 'Enable location to see your weather.';
-      document.getElementById('weather-temp').textContent = '';
+      document.getElementById('weather-temperature').textContent = '';
     }, {
       timeout: 10000, // 10 second timeout
       enableHighAccuracy: false
