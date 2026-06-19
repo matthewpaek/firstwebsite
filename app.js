@@ -17,7 +17,7 @@ async function getWeather() {
         const temp = Math.round(weatherData.current_weather.temperature);
         const weatherCode = weatherData.current_weather.weathercode;
         
-        document.getElementById('weather-temperature').textContent = `${temp}°F`;
+        document.getElementById('weather-temp').textContent = `${temp}°F`;
         document.getElementById('weather-icon').textContent = getWeatherIcon(weatherCode);
         
         // Fetch location in background (don't block weather display)
