@@ -17,7 +17,7 @@ async function getWeather() {
         const temp = Math.round(weatherData.current_weather.temperature);
         const weatherCode = weatherData.current_weather.weathercode;
         
-        document.getElementById('weather-temp').textContent = `${temp}°F`;
+        document.getElementById('weather-temperature').textContent = `${temp}°F`;
         document.getElementById('weather-icon').textContent = getWeatherIcon(weatherCode);
         
         // Fetch location in background (don't block weather display)
@@ -30,7 +30,7 @@ async function getWeather() {
     }, (error) => {
       // If location access denied, show default message
       document.getElementById('weather-location').textContent = 'Enable location to see your weather.';
-      document.getElementById('weather-temperature').textContent = '';
+      document.getElementById('weather-temp').textContent = '';
     }, {
       timeout: 10000, // 10 second timeout
       enableHighAccuracy: false
