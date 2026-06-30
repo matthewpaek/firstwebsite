@@ -7,14 +7,23 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <main class="container">
-    <h1>Hello World</h1>
-    <p class="intro">Welcome to my homepage.</p>
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="Home">Matthew</a>
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
+      <span class="theme-toggle__icon" aria-hidden="true">🌙</span>
+      <span class="theme-toggle__label">Dark mode</span>
+    </button>
+  </header>
 
+  <main class="container">
+    <section class="hero">
       <img class="profile-photo" src="062-WVq9rEaHPx0.jpeg" alt="Photo of me" />
-      <h1>Hello, I'm Matthew</h1>
-      <p class="intro">UX Designer & Developer crafting digital experiences</p>
-      <button type="button" class="contact-btn" onclick="window.location.href='about.html';">Get In Touch</button>
+      <div class="hero-copy">
+        <p class="eyebrow">Welcome to my homepage</p>
+        <h1>Hello, I'm Matthew</h1>
+        <p class="intro">UX Designer & Developer crafting digital experiences</p>
+        <button type="button" class="contact-btn" onclick="window.location.href='about.html';">Get In Touch</button>
+      </div>
     </section>
 
     <section class="projects">

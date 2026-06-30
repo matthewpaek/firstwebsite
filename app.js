@@ -298,3 +298,36 @@ if (document.readyState === 'loading') {
 } else {
   initializeApp();
 }
+
+// Theme toggle button
+const toggleButton = document.getElementById('theme-toggle');
+const icon = toggleButton?.querySelector('.theme-toggle__icon');
+const label = toggleButton?.querySelector('.theme-toggle__label');
+
+const setTheme = (theme) => {
+  document.body.classList.toggle('dark', theme === 'dark');
+  const isDark = document.body.classList.contains('dark');
+
+  if (toggleButton) {
+    toggleButton.setAttribute('aria-pressed', String(isDark));
+  }
+
+  if (icon) {
+    icon.textContent = isDark ? '☀️' : '🌙';
+  }
+
+  if (label) {
+    label.textContent = isDark ? 'Light mode' : 'Dark mode';
+  }
+
+  localStorage.setItem('theme', theme);
+};
+
+const storedTheme = localStorage.getItem('theme');
+const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+setTheme(storedTheme || preferredTheme);
+
+toggleButton?.addEventListener('click', () => {
+  const nextTheme = document.body.classList.contains('dark') ? 'light' : 'dark';
+  setTheme(nextTheme);
+});
