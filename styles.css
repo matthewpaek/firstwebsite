@@ -79,3 +79,68 @@ h1 {
 .contact-btn:active {
   transform: translateY(1px);
 }
+
+/* Timeline Styles */
+.timeline {
+  position: relative;
+  padding: 20px 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 30px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: #ddd;
+}
+
+.timeline-item {
+  margin-bottom: 30px;
+  padding-left: 80px;
+  position: relative;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: 16px;
+  top: 5px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #007bff;
+  border: 3px solid white;
+  box-shadow: 0 0 0 2px #007bff;
+}
+
+.timeline-date {
+  font-weight: bold;
+  color: #007bff;
+  font-size: 0.9em;
+  margin-bottom: 5px;
+}
+
+.timeline-content h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.1em;
+}
+
+.timeline-content p {
+  margin: 0;
+  color: #666;
+  line-height: 1.5;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
